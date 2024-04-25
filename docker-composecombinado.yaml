@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+#  consultoriodb:
+#    image: postgres:16
+#    container_name: consultoriodb
+#    restart: always
+#    ports:
+#      - 5434:5432
+#    environment:
+#      - POSTGRES_USER=root
+#      - POSTGRES_PASSWORD=manager
+#      - POSTGRES_DB=consultorio
+#    volumes:
+#      - ./postgres:/var/lib/postgresql/data
+#    networks:
+#      - spring
+  consultorioapp:
+    build: .
+    container_name: consultorioapp
+#    restart: on-failure
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./imagenes:/app/public/
+#    depends_on:
+#      consultoriodb:
+#        condition: service_completed_successfully
+#    networks:
+#      - spring  
+
+#networks:
+#  spring:
+#    name: spring
+#    external: true      

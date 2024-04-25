@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  consultorioapp:
+    build: .
+    container_name: consultorioapp
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./imagenes:/app/public/ 
