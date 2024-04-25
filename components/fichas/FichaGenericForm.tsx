@@ -19,7 +19,8 @@ export default function FichaGenericForm({
   pacientes,
   totalPacientes,
 }: FichaProps) {
-  
+  console.log("aca")
+  console.log(pacientes);
   //modal
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
@@ -168,7 +169,7 @@ export default function FichaGenericForm({
         </div>
         <FichaAddConsulta/>
         <PacientesModal
-          personas={pacientesForms}
+          personas={pacientes}
           modalOpen={modalOpen}
           setModalOpen={setModalOpen}
           setPacienteForm={getPersonaSelected}

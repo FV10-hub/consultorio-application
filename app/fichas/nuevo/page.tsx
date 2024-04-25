@@ -10,7 +10,8 @@ async function getPacientes(page: number, pageSize: number) {
     take: pageSize,
     skip: skipPage,
     where:{
-      esPaciente: true
+      esPaciente: true,
+      ficha: null,
     }
   });
 }
