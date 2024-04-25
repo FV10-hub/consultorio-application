@@ -26,6 +26,7 @@ export default function FichaAddConsulta() {
     createdAt: new Date(),
     updatedAt: new Date(),
     hora_consulta: "",
+    motivo_consulta: "",
     observacion: "",
     indicacion: "",
     receta: "",

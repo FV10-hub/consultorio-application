@@ -34,6 +34,7 @@ export default function FichaEditConsulta({ consultas }: ConsultasProps) {
     updatedAt: new Date(),
     hora_consulta: "",
     observacion: "",
+    motivo_consulta: "",
     indicacion: "",
     receta: "",
     asistio: true,
