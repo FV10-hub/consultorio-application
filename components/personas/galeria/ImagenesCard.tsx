@@ -14,7 +14,6 @@ export default function ImagenesCard({ galeria }: GaleriaCardProps) {
   const openModal = () => {
     setShowModal(true);
   };
-  console.log(getImagePath(galeria.url!));
   const closeModal = () => {
     setShowModal(false);
   };

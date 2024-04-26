@@ -3,6 +3,7 @@ import { especialidades } from "./data/especialidad";
 import { fichas } from "./data/ficha";
 import { PrismaClient } from "@prisma/client";
 import { consultas } from "./data/consultas";
+import { users } from "./data/usuario";
 
 const prisma = new PrismaClient();
 
@@ -19,6 +20,9 @@ async function main() {
     });
     await prisma.consulta.createMany({
       data: consultas,
+    });
+    await prisma.user.createMany({
+      data: users,
     });
   } catch (error) {
     console.log(error);

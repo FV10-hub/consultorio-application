@@ -1,3 +1,4 @@
+import { auth } from "@/auth.config";
 import PersonaPagination from "@/components/personas/PersonaPagination";
 import PersonaSearchForm from "@/components/personas/PersonaSearchForm";
 import PersonaTable from "@/components/personas/PersonaTable";
@@ -26,6 +27,12 @@ export default async function PersonaPage({
 }: {
   searchParams: { page: string };
 }) {
+  const session = await auth();
+
+  if ( !session?.user ) {
+    redirect('/auth/login');
+  }
+
   const page = +searchParams.page || 1;
   const pageSize = 5;
   if (page < 0) redirect("/personas");
