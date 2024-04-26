@@ -2,7 +2,7 @@ export const personas = [
     {
       nombre_completo: "Juan Pérez",
       documento: "888999",
-      telefono: "09868827710",
+      telefono: "0986882771",
       email: "juan.perez@correo.com",
       password: "clave123",
       esDoctor: false,

@@ -49,6 +49,9 @@ body {
   animation-name: fadeIn;
 }
 
+.btn {
+  @apply text-white w-full inline-flex items-center rounded-lg lg:w-auto text-xs px-10 py-3 text-center font-bold cursor-pointer;
+}
 
 .btn-primary {
   @apply bg-blue-600 hover:bg-blue-800 text-white py-2 px-4 rounded transition-all;
