@@ -2,6 +2,7 @@ export const consultas = [
     {
       hora_consulta: "10:00",
       observacion: "Control presión arterial",
+      motivo_consulta: "motivo 1",
       indicacion: "Reducir consumo de sal",
       receta: "Medicamento X (dosis según prescripción médica)",
       asistio: true,
@@ -10,6 +11,7 @@ export const consultas = [
     {
       hora_consulta: "11:30",
       observacion: "Revisión post-operatoria",
+      motivo_consulta: "motivo 2",
       indicacion: "Reposo relativo por 7 días",
       receta: "Medicamento Y (dosis según prescripción médica)",
       asistio: true,
@@ -18,6 +20,7 @@ export const consultas = [
     {
       hora_consulta: "15:00",
       observacion: "Consulta pediátrica",
+      motivo_consulta: "motivo 3",
       indicacion: "Vacuna según calendario",
       receta: "Medicamento Z (dosis según prescripción médica)",
       asistio: false,

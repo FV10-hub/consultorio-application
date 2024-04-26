@@ -36,10 +36,7 @@ export default function FichaEditarForm({ ficha }: FichaEditarProps) {
           asistio: consulta.asistio ? true : false,
         })),
     };
-    console.log(":::YATUSABES");
-    console.log(data);
 
-    return;
     const response = await updateFicha(data, ficha.id);
     if (!response) {
       toast.error("No se Guardo");
