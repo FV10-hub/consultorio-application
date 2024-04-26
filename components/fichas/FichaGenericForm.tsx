@@ -67,6 +67,7 @@ export default function FichaGenericForm({
       personaId: pacienteState.id,
       consultas: consultasDeFicha.map((consulta) => ({
         hora_consulta: consulta.hora_consulta,
+        motivo_consulta: consulta.motivo_consulta,
         observacion: consulta.observacion,
         indicacion: consulta.indicacion,
         receta: consulta.receta,

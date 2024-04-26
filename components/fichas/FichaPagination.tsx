@@ -12,7 +12,7 @@ export default function FichaPagination({
 }: FichaPaginationProps) {
   const pages = Array.from({ length: totalPages }, (init, i) => i + 1);
   return (
-    <nav className="flex justify-center py-10">
+    <nav className="flex text-center justify-center mt-10 mb-32">
       {page > 1 && (
         <Link
           href={`/fichas?page=${page - 1}`}
@@ -26,7 +26,7 @@ export default function FichaPagination({
           <Link
             key={pagina}
             href={`/fichas?page=${pagina}`}
-            className={`${pagina === page && 'font-black'} bg-white px-4 py-2 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0`}
+            className={`${pagina === page && 'bg-cyan-500 hover:bg-cyan-600 shadow-sm text-white hover:text-white'} outline-none transition-all duration-300 bg-gray-400 px-4 py-2 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0`}
           >
             {pagina}
           </Link>

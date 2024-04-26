@@ -10,6 +10,7 @@ export async function updateFicha(
   idFicha: number
 ): Promise<boolean> {
   try {
+
     let fichaUpdate: Ficha = await prisma.ficha.update({
       where: { id: idFicha },
       data: {
@@ -18,6 +19,7 @@ export async function updateFicha(
           create: data.consultas
             .map((consulta: any) => ({
               hora_consulta: consulta.hora_consulta,
+              motivo_consulta: consulta.motivo_consulta || "MOTIVO NULO",
               observacion: consulta.observacion,
               indicacion: consulta.indicacion,
               receta: consulta.receta,

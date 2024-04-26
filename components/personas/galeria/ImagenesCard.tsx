@@ -19,29 +19,39 @@ export default function ImagenesCard({ galeria }: GaleriaCardProps) {
   };
   return (
     <>
-      <Head>
-        <meta
-          http-equiv="Cache-Control"
-          content="no-cache, no-store, must-revalidate"
-        />
-        <meta http-equiv="Pragma" content="no-cache" />
-        <meta http-equiv="Expires" content="0" />
-      </Head>
-      <div className="border bg-white">
+      <div className="bg-white shadow-md mt-5 border border-gray-200 rounded-lg max-w-sm dark:bg-gray-600 dark:border-gray-700">
         <Image
-          width={300}
+          width={385}
           height={300}
           src={getImagePath(galeria.url!)}
           alt={`Imagen`}
-          className="cursor-pointer"
-          onClick={openModal}
+          className="rounded-t-lg"
         />
-
         <div className="p-5">
-          <h3 className="text-sm font-bold">Descripcion</h3>
-          <h3 className="mt-5 font-black text-sm text-amber-500">
-            <p className="text-sm font-bold">{galeria.descripcion}</p>{" "}
-          </h3>
+          <h5 className="text-gray-900 font-bold text-2xl tracking-tight mb-2 dark:text-white">
+            Descripcion:
+          </h5>
+          <p className="font-normal text-gray-700 mb-3 dark:text-gray-400">
+            {galeria.descripcion}
+          </p>
+          <button
+            onClick={openModal}
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Ver Imagen
+            <svg
+              className="-mr-1 ml-2 h-4 w-4"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </button>
         </div>
       </div>
       {showModal && (

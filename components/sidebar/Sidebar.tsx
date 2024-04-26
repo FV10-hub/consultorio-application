@@ -15,28 +15,28 @@ export default function Sidebar() {
   return (
     <div>
         <Logo name={session?.user.name!}/>
-        <nav className="mt-10">
+        <nav className="mt-10 ml-5">
           <Link
             href="/personas"
-            className="flex items-center mt-3 p-2 hover:bg-gray-100 rounded transition-all"
+            className="flex items-center p-2 hover:bg-gray-100 rounded transition-all"
           >
             <IoBodyOutline size={30} />
-            <span className="ml-3 text-xl">Pacientes</span>
+            <span className="ml-5 text-xl">Pacientes</span>
           </Link>
           <Link
             href="/fichas"
-            className="flex items-center mt-3 p-2 hover:bg-gray-100 rounded transition-all"
+            className="flex items-center p-2 hover:bg-gray-100 rounded transition-all"
           >
             <IoBagAddOutline size={30} />
-            <span className="ml-3 text-xl">Fichas</span>
+            <span className="ml-5 text-xl">Fichas</span>
           </Link>
           {isAuthenticated && (
             <button
-              className="flex w-full items-center mt-3 p-2 hover:bg-gray-100 rounded transition-all"
+              className="flex w-full items-center p-2 hover:bg-gray-100 rounded transition-all"
               onClick={() => logout()}
             >
               <IoLogOutOutline size={30} />
-              <span className="ml-3 text-xl">Salir</span>
+              <span className="ml-5 text-xl">Salir</span>
             </button>
           )}
         </nav>

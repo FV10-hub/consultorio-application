@@ -25,16 +25,21 @@ export default function FichaEditarForm({ ficha }: FichaEditarProps) {
       id: fichaAEditar.id,
       tipo_seguro: fichaAEditar.tipo_seguro,
       consultas: consultasDeFicha
-      .filter(consulta => consulta.id === 0 || consulta.id === undefined)
-      .map((consulta) => ({
-        id: consulta.id,
-        hora_consulta: consulta.hora_consulta,
-        observacion: consulta.observacion,
-        indicacion: consulta.indicacion,
-        receta: consulta.receta,
-        asistio: consulta.asistio ? true : false,
-      })),
+        .filter((consulta) => consulta.id === 0 || consulta.id === undefined)
+        .map((consulta) => ({
+          id: consulta.id,
+          hora_consulta: consulta.hora_consulta,
+          motivo_consulta: consulta.motivo_consulta,
+          observacion: consulta.observacion,
+          indicacion: consulta.indicacion,
+          receta: consulta.receta,
+          asistio: consulta.asistio ? true : false,
+        })),
     };
+    console.log(":::YATUSABES");
+    console.log(data);
+
+    return;
     const response = await updateFicha(data, ficha.id);
     if (!response) {
       toast.error("No se Guardo");

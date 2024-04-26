@@ -1,9 +1,9 @@
 "use client";
 import { Persona } from "@prisma/client";
-import PersonaPagination from "../personas/PersonaPagination";
-import PersonaTable from "../personas/PersonaTable";
 import { useState } from "react";
-import { useDebounce, useDebouncedCallback } from "use-debounce";
+import {
+  IoSearchOutline
+} from "react-icons/io5";
 
 interface ModalProps {
   personas: Persona[];
@@ -23,103 +23,130 @@ export const PacientesModal: React.FC<ModalProps> = ({
     setModalOpen(!modalOpen);
   }
 
+  const [searchTerm, setSearchTerm] = useState("");
+  const [listaFiltrada, setListaFiltrada] = useState(personas);
+
   const onChangePaciente = (event: any) => {
-    const value = event.target.value;
-    setSearchTerm(value);
-    debounced(searchTerm);
+    const nuevoFiltro = event.target.value;
+    setSearchTerm(nuevoFiltro);
+    if (nuevoFiltro === "") {
+      setListaFiltrada(personas);
+    } else {
+      const listaFiltrada = personas!
+        .filter((persona) =>
+          persona.nombre_completo
+            ?.toLocaleLowerCase()
+            .includes(searchTerm.toLowerCase())
+        )
+        .slice(0, 5);
+      setListaFiltrada(listaFiltrada);
+    }
   };
 
-  const debounced = useDebouncedCallback((value) => {
-    const filtered = personas
-      .filter((paciente) =>
-        paciente.nombre_completo?.toLocaleLowerCase().includes(value)
-      )
-      .slice(0, 5);
-    setFilteredItems(filtered);
-  }, 300);
-
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filteredItems, setFilteredItems] = useState(personas.slice(0, 5));
   return (
     <>
-      <dialog id="paciente_modal" open={modalOpen} className="h-2/4 modal">
-        <div className="bg-gray-400 p-5 w-auto rounded-md mt-2 mb-2">
-          <div className="flex justify-between">
-            <input
-              type="text"
-              name="search"
-              id="search"
-              autoComplete="off"
-              className="w-96 p-3 rounded-md"
-              placeholder="Buscar paciente"
-              value={searchTerm}
-              onChange={onChangePaciente}
-            />
-            <button onClick={() => setModalOpen(!modalOpen)} className="btn">
-              Cerrar
-            </button>
-          </div>
-          <div className="">
-            <table className="divide-y divide-gray-300 ">
-              <thead>
-                <tr>
-                  <th
-                    scope="col"
-                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
-                  >
-                    Documento
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    Nombre Completo
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    Correo
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    <span>Acciones</span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y h-300px divide-gray-200">
-                {filteredItems.map((persona) => (
-                  <tr className="border-b " key={persona.id}>
-                    <td className="p-3 text-lg text-gray-800">
-                      {persona.documento}
-                    </td>
-                    <td className="p-3 text-lg text-gray-800">
-                      {persona.nombre_completo}
-                    </td>
-                    <td className="p-3 text-lg text-gray-800">
-                      {persona.email}
-                    </td>
-                    <td className="p-3 text-lg text-gray-800 ">
-                      <div className="flex gap-2 items-center">
-                        <button
-                          onClick={() => {
-                            onPacienteSelect(persona);
-                          }}
-                          className="bg-white hover:bg-gray-600 text-gray-400 rounded-lg w-full p-2 uppercase font-bold text-xs text-center"
+      {modalOpen ? (
+        <>
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+            <div className="relative h-2/4 w-auto mx-auto max-w-full">
+              {/*content*/}
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                {/*header*/}
+                <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                  <h3 className="text-3xl font-semibold">
+                    Selecciona un Paciente
+                  </h3>
+                </div>
+                <div className="w-96 m-5 flex flex-row items-center">
+                  <IoSearchOutline size={20} />
+                  <input
+                    type="text"
+                    name="search"
+                    id="search"
+                    autoComplete="off"
+                    className="p-3 rounded-md"
+                    placeholder="Buscar por nombre"
+                    value={searchTerm}
+                    onChange={onChangePaciente}
+                  />
+                </div>
+
+                {/*body*/}
+                <div className="relative p-6 flex-auto">
+                  <table className="divide-y divide-gray-300 ">
+                    <thead>
+                      <tr>
+                        <th
+                          scope="col"
+                          className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
                         >
-                          Seleccionar
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                          Documento
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                        >
+                          Nombre Completo
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                        >
+                          Correo
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                        >
+                          <span>Acciones</span>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y h-300px divide-gray-200">
+                      {listaFiltrada.map((persona) => (
+                        <tr className="border-b " key={persona.id}>
+                          <td className="p-3 text-lg text-gray-800">
+                            {persona.documento}
+                          </td>
+                          <td className="p-3 text-lg text-gray-800">
+                            {persona.nombre_completo}
+                          </td>
+                          <td className="p-3 text-lg text-gray-800">
+                            {persona.email}
+                          </td>
+                          <td className="p-3 text-lg text-gray-800 ">
+                            <div className="flex gap-2 items-center">
+                              <button
+                                onClick={() => {
+                                  onPacienteSelect(persona);
+                                }}
+                                className="bg-green-600 hover:bg-green-400 text-white rounded-lg w-full p-2 uppercase font-bold text-xs text-center"
+                              >
+                                Seleccionar
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                {/*footer*/}
+                <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                  <button
+                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => setModalOpen(false)}
+                  >
+                    Cerrar
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </dialog>
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+        </>
+      ) : null}
     </>
   );
 };

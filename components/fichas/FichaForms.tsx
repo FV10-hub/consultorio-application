@@ -10,9 +10,6 @@ export default async function FichaForms({
   pacientes,
   totalPacientes,
 }: FichaProps) {
-  const pacientesForms = pacientes;
-  const totalPacientesForms = totalPacientes;
-
   return (
     <>
       <FichaGenericForm pacientes={pacientes ?? []} totalPacientes={totalPacientes ?? 1} />

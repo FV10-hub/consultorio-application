@@ -97,14 +97,14 @@ export default function FichaEditConsulta({ consultas }: ConsultasProps) {
       )}
 
       <div className="bg-white shadow-md rounded-lg p-4 mt-4">
-        <table className="w-full table-auto table table-xs table-pin-rows table-pin-cols">
-          <thead>
+      <table className="min-w-full">
+          <thead className="bg-gray-200 border-b">
             <tr>
-              <th className="px-4 py-2 text-gray-700 font-bold">Fecha</th>
-              <th className="px-4 py-2 text-gray-700 font-bold">Hora</th>
-              <th className="px-4 py-2 text-gray-700 font-bold">Observación</th>
-              <th className="px-4 py-2 text-gray-700 font-bold">Asistencia</th>
-              <th className="px-4 py-2 text-gray-700 font-bold">Ver</th>
+              <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">Fecha</th>
+              <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">Hora</th>
+              <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">Observación</th>
+              <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">Asistencia</th>
+              <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">Ver</th>
             </tr>
           </thead>
           <tbody>
@@ -116,12 +116,12 @@ export default function FichaEditConsulta({ consultas }: ConsultasProps) {
               )
               .map((consulta) => (
                 <tr key={consulta.id}>
-                  <td className="px-4 py-2">
+                  <td className="ext-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                     {formatFecha(consulta.createdAt)}
                   </td>
-                  <td className="px-4 py-2">{consulta.hora_consulta}</td>
-                  <td className="px-4 py-2">{consulta.observacion}</td>
-                  <td className="px-4 py-2">
+                  <td className="ext-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{consulta.hora_consulta}</td>
+                  <td className="ext-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{consulta.observacion}</td>
+                  <td className="ext-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                     <input
                       type="checkbox"
                       className="mr-2"
@@ -129,12 +129,12 @@ export default function FichaEditConsulta({ consultas }: ConsultasProps) {
                       disabled
                     />
                   </td>
-                  <td className="px-4 py-2">
+                  <td className="ext-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                     <button
                       onClick={() => handleVerConsulta(consulta)}
-                      className="btn"
+                      className="btn bg-gray-400 rounded-lg shadow-xl"
                     >
-                      Ver <IoEye />
+                      Ver <IoEye className="ml-2" size={20}/>
                     </button>
                   </td>
                 </tr>

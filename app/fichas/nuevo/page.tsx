@@ -1,14 +1,12 @@
-import AddFichaForm from '@/components/fichas/AddFichaForm'
-import FichaForms from '@/components/fichas/FichaForms'
-import GoBackButton from '@/components/ui/GoBackButton'
-import Heading from '@/components/ui/Heading'
+import FichaForms from '@/components/fichas/FichaForms';
+import GoBackButton from '@/components/ui/GoBackButton';
+import Heading from '@/components/ui/Heading';
 import { prisma } from '@/src/lib/prisma';
 
-async function getPacientes(page: number, pageSize: number) {
-  const skipPage = (page - 1) * pageSize;
+async function getPacientes() {
+  const skipPage = 1
   return await prisma.persona.findMany({
-    take: pageSize,
-    skip: skipPage,
+    
     where:{
       esPaciente: true,
       ficha: null,
@@ -25,7 +23,7 @@ async function getCountPacientes() {
 }
 
 export default async function CrearFichaaPage() {
-  const pacientes = await getPacientes(1,10);
+  const pacientes = await getPacientes();
   const totalPacientes = pacientes.length;
   return (
     <>

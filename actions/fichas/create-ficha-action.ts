@@ -9,6 +9,7 @@ type FichaToCreate = {
   consultas: {
       hora_consulta: string | null;
       observacion: string | null;
+      motivo_consulta: string | null;
       indicacion: string | null;
       receta: string | null;
       asistio: boolean;
@@ -19,6 +20,7 @@ type FichaToCreate = {
       const consultasFormatted = data.consultas.map(consulta => ({
         hora_consulta: consulta.hora_consulta,
         observacion: consulta.observacion,
+        motivo_consulta: consulta.motivo_consulta,
         indicacion: consulta.indicacion,
         receta: consulta.receta,
         asistio: consulta.asistio,  // Convertir a booleano
