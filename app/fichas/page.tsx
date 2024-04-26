@@ -1,3 +1,4 @@
+import { auth } from "@/auth.config";
 import FichaPagination from "@/components/fichas/FichaPagination";
 import FichaSearchForm from "@/components/fichas/FichaSearchForm";
 import FichaTable from "@/components/fichas/FichaTable";
@@ -25,6 +26,12 @@ async function getCountFichas() {
 
 export default async function FichaPage({searchParams,}: {searchParams: { page: string, actualizar: string };
 }) {
+  const session = await auth();
+
+  if ( !session?.user ) {
+    redirect('/auth/login');
+  }
+
   const page = +searchParams.page || 1;
   const actualizar=searchParams.actualizar||null;
   const pageSize = 5;

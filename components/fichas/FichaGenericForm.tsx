@@ -19,8 +19,6 @@ export default function FichaGenericForm({
   pacientes,
   totalPacientes,
 }: FichaProps) {
-  console.log("aca")
-  console.log(pacientes);
   //modal
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 

@@ -1,56 +1,45 @@
 "use client";
-import ContentMenu from "../ui/ContentMenu";
-import { useParams } from "next/navigation";
+import { logout } from "@/actions/auth/logout";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
+import {
+  IoBagAddOutline,
+  IoBodyOutline,
+  IoLogOutOutline,
+} from "react-icons/io5";
 import Logo from "../ui/Logo";
 
-const menus = [
-    {
-      id: 1,
-      name: "Pacientes",
-      imagen: "paciente",
-      path: "/personas",
-    }/*,
-    {
-      id: 2,
-      name: "Pacientes",
-      imagen: "paciente",
-      path: "pacientes",
-    },
-    {
-      id: 3,
-      name: "Doctores",
-      imagen: "doctor",
-      path: "doctores",
-    },
-    {
-      id: 2,
-      name: "Especialidades",
-      imagen: "especialidad",
-      path: "/especialidades",
-    },
-    {
-      id: 3,
-      name: "Galeria",
-      imagen: "galeria",
-      path: "/galeria",
-    }*/,
-    {
-      id: 4,
-      name: "Fichas",
-      imagen: "ficha",
-      path: "/fichas",
-    },
-  ];
-
 export default function Sidebar() {
+  const { data: session } = useSession();
+  const isAuthenticated = !!session?.user;
   return (
-    <aside className="md:w-72 md:h-screen bg-white">
-      <Logo />
-      <nav className="mt-10">
-        {menus.map((menu) => (
-          <ContentMenu key={menu.id} menu={menu} />
-        ))}
-      </nav>
-    </aside>
+    <div>
+        <Logo name={session?.user.name!}/>
+        <nav className="mt-10">
+          <Link
+            href="/personas"
+            className="flex items-center mt-3 p-2 hover:bg-gray-100 rounded transition-all"
+          >
+            <IoBodyOutline size={30} />
+            <span className="ml-3 text-xl">Pacientes</span>
+          </Link>
+          <Link
+            href="/fichas"
+            className="flex items-center mt-3 p-2 hover:bg-gray-100 rounded transition-all"
+          >
+            <IoBagAddOutline size={30} />
+            <span className="ml-3 text-xl">Fichas</span>
+          </Link>
+          {isAuthenticated && (
+            <button
+              className="flex w-full items-center mt-3 p-2 hover:bg-gray-100 rounded transition-all"
+              onClick={() => logout()}
+            >
+              <IoLogOutOutline size={30} />
+              <span className="ml-3 text-xl">Salir</span>
+            </button>
+          )}
+        </nav>
+    </div>
   );
 }
