@@ -4,9 +4,7 @@ import Heading from '@/components/ui/Heading';
 import { prisma } from '@/src/lib/prisma';
 
 async function getPacientes() {
-  const skipPage = 1
   return await prisma.persona.findMany({
-    
     where:{
       esPaciente: true,
       ficha: null,

@@ -6,7 +6,7 @@ import { Providers } from "@/components/providers/Providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Conusltorio Medico APP",
+  title: "Consultorio Medico APP",
   description: "Una aplicacion para seguimiento de pacientes",
   icons: {
     icon: [

@@ -1,15 +1,15 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { AiFillSave } from "react-icons/ai";
-import { IoAdd, IoSearch } from "react-icons/io5";
-import { PacientesModal } from "./PacientesModal";
-import { Persona } from "@prisma/client";
-import { useStore } from "@/src/store";
-import FichaAddConsulta from "./FichaAddConsulta";
-import { useForm } from "@/src/hooks/useForm";
-import { toast } from "react-toastify";
 import { createFicha } from "@/actions/fichas/create-ficha-action";
+import { useForm } from "@/src/hooks/useForm";
+import { useStore } from "@/src/store";
+import { Persona } from "@prisma/client";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { AiFillSave } from "react-icons/ai";
+import { IoSearch } from "react-icons/io5";
+import { toast } from "react-toastify";
+import FichaAddConsulta from "./FichaAddConsulta";
+import { PacientesModal } from "./PacientesModal";
 type FichaProps = {
   pacientes: Persona[];
   totalPacientes: number;
@@ -32,8 +32,6 @@ export default function FichaGenericForm({
   const limpiarTodo = useStore((state) => state.limpiarTodo);
 
   //PROPS
-  const pacientesForms = pacientes;
-  const totalPacientesForms = totalPacientes;
   function getPersonaSelected(persona: Persona) {
     //TODO: agregar aca personaId si hay problemas
     agregarPacienteAFicha(persona);
@@ -45,7 +43,6 @@ export default function FichaGenericForm({
 
   //LOCAL
   const router = useRouter();
-  const tipoSegurosList = Array.of("IPS", "PRIVADO", "NO_TIENE");
 
   const { formState, onResetForm, onIputChange } = useForm({
     createdAt: new Date().toISOString().split("T")[0],
