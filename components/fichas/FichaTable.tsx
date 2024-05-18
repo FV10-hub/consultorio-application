@@ -37,12 +37,17 @@ export default function FichaTable({ fichas }: FichaTableProps) {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {fichas.map((ficha) => (
-                  <FichaDetalle
-                    key={ficha.id}
-                    ficha={ficha}
-                  />
-                ))}
+                {fichas.length > 0 ? (
+                  fichas.map((ficha) => (
+                    <FichaDetalle key={ficha.id} ficha={ficha} />
+                  ))
+                ) : (
+                  <tr className="border-b">
+                    <td className="p-3 text-lg text-gray-800">
+                      No hay registros
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>

@@ -9,17 +9,19 @@ import { redirect } from "next/navigation";
 
 async function getPersonas(page: number, pageSize: number) {
   const skipPage = (page - 1) * pageSize;
-  return await prisma.persona.findMany({
+  let personas = await prisma.persona.findMany({
     take: pageSize,
     skip: skipPage,
-    orderBy:{
-      createdAt: 'desc'
-    }
+    orderBy: {
+      createdAt: "desc",
+    },
   });
+  return personas.length > 0 ? personas : [];
 }
 
 async function getCountPersonas() {
-  return await prisma.persona.count();
+  let count = await prisma.persona.count();
+  return count > 0 ? count : 1;
 }
 
 export default async function PersonaPage({
@@ -29,8 +31,8 @@ export default async function PersonaPage({
 }) {
   const session = await auth();
 
-  if ( !session?.user ) {
-    redirect('/auth/login');
+  if (!session?.user) {
+    redirect("/auth/login");
   }
 
   const page = +searchParams.page || 1;
@@ -58,7 +60,7 @@ export default async function PersonaPage({
         </Link>
         <PersonaSearchForm />
       </div>
-      <PersonaTable personas={personas ?? []}/>
+      <PersonaTable personas={personas ?? []} />
       <PersonaPagination page={page} totalPages={totalPages} />
     </>
   );

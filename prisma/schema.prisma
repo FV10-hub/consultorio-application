@@ -38,7 +38,7 @@ model Ficha {
   personaId   Int        @unique
   tipo_seguro String?
   persona     Persona    @relation(fields: [personaId], references: [id])
-  consultas   Consulta[]
+  consultas   Consulta[] 
 }
 
 model Consulta {
@@ -51,7 +51,7 @@ model Consulta {
   indicacion      String?
   receta          String?
   asistio         Boolean  @default(false)
-  ficha           Ficha    @relation(fields: [fichaId], references: [id])
+  ficha           Ficha    @relation(fields: [fichaId], references: [id], onDelete: Cascade)
   fichaId         Int
 }
 
@@ -60,7 +60,7 @@ model Galeria {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   personaId   Int
-  persona     Persona  @relation(fields: [personaId], references: [id])
+  persona     Persona  @relation(fields: [personaId], references: [id], onDelete: Cascade)
   url         String?
   descripcion String?
 }

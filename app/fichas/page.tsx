@@ -9,19 +9,21 @@ import { redirect } from "next/navigation";
 
 async function getFichas(page: number, pageSize: number) {
   const skipPage = (page - 1) * pageSize;
-  return await prisma.ficha.findMany({
+  let fichas =  await prisma.ficha.findMany({
     take: pageSize,
     skip: skipPage,
     include: {
       persona: true
     }
   });
+  return fichas.length > 0 ? fichas : [];
 }
 //TODO: esto es para poder darle un tipo especifico para el autocompletado de typescript con el retorno de esta funcion
 export type FichasWithPersonas = Awaited<ReturnType<typeof getFichas>>
 
 async function getCountFichas() {
-  return await prisma.ficha.count();
+  let count = await prisma.ficha.count();
+  return count > 0 ? count : 1;
 }
 
 export default async function FichaPage({searchParams,}: {searchParams: { page: string, actualizar: string };

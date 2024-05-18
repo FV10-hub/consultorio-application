@@ -1,13 +1,15 @@
 "use client";
 import { FichaWithPersonaAndConsultas } from "@/app/fichas/[id]/editar/page";
 import { formatFecha } from "@/src/utils";
-import { AiFillSave } from "react-icons/ai";
+import { AiFillSave, AiOutlineTransaction } from "react-icons/ai";
 import FichaAddConsulta from "./FichaAddConsulta";
 import { updateFicha } from "@/actions/fichas/update-ficha-action";
 import { toast } from "react-toastify";
 import { useStore } from "@/src/store";
 import { useRouter } from "next/navigation";
 import FichaEditConsulta from "./FichaEditConsulta";
+import { IoTrashOutline } from "react-icons/io5";
+import { deleteFicha } from "@/actions/fichas/delete-ficha-action";
 
 type FichaEditarProps = {
   ficha: FichaWithPersonaAndConsultas;
@@ -47,10 +49,28 @@ export default function FichaEditarForm({ ficha }: FichaEditarProps) {
     limpiarTodo();
     router.push("/fichas");
   };
+  //ELIMINAR
+  const handleEliminarFicha = async () => {
+    const response = await deleteFicha(fichaAEditar.id);
+    if (!response) {
+      toast.error("No se Elimino");
+      return;
+    }
+
+    toast.success("Ficha Eliminada con Exito");
+    limpiarTodo();
+    router.push("/fichas");
+  };
   return (
     <>
       <div className="border-b border-gray-900/10 pb-12 ">
         <div className="flex flex-col lg:flex-row lg:justify-end gap-5">
+          <button
+            onClick={handleEliminarFicha}
+            className="btn bg-red-500 hover:bg-red-600 text-white"
+          >
+            Eliminar Ficha <IoTrashOutline className="ml-2" size={18} />
+          </button>
           <button
             onClick={handleGuardarFicha}
             className="btn bg-green-500 hover:bg-green-600 text-white"
