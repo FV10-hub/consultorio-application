@@ -1,5 +1,5 @@
 "use client";
-import { FichaWithPersonaAndConsultas } from "@/app/fichas/[id]/editar/page";
+import { FichaWithPersonaAndConsultas } from "@/app/fichas/[personaId]/editar/page";
 import { formatFecha } from "@/src/utils";
 import { AiFillSave, AiOutlineTransaction } from "react-icons/ai";
 import FichaAddConsulta from "./FichaAddConsulta";
@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import FichaEditConsulta from "./FichaEditConsulta";
 import { IoTrashOutline } from "react-icons/io5";
 import { deleteFicha } from "@/actions/fichas/delete-ficha-action";
+import { useEffect, useState } from "react";
 
 type FichaEditarProps = {
   ficha: FichaWithPersonaAndConsultas;
@@ -17,15 +18,23 @@ type FichaEditarProps = {
 
 export default function FichaEditarForm({ ficha }: FichaEditarProps) {
   const router = useRouter();
+  const [tipo, setTipo] = useState("");
   const fichaAEditar = ficha;
   const limpiarTodo = useStore((state) => state.limpiarTodo);
   const consultasDeFicha = useStore((state) => state.consultasDeFicha);
+
+  useEffect(() => {
+    if (ficha.id != null) {
+      setTipo(ficha.tipo_seguro!)  
+    }
+  }, [ficha])
+  
 
   //GUARDAR
   const handleGuardarFicha = async () => {
     const data = {
       id: fichaAEditar.id,
-      tipo_seguro: fichaAEditar.tipo_seguro,
+      tipo_seguro: tipo,
       consultas: consultasDeFicha
         .filter((consulta) => consulta.id === 0 || consulta.id === undefined)
         .map((consulta) => ({
@@ -44,10 +53,10 @@ export default function FichaEditarForm({ ficha }: FichaEditarProps) {
       toast.error("No se Guardo");
       return;
     }
-
+    setTipo("");
     toast.success("Se guardo");
     limpiarTodo();
-    router.push("/fichas");
+    router.push("/personas");
   };
   //ELIMINAR
   const handleEliminarFicha = async () => {
@@ -59,8 +68,14 @@ export default function FichaEditarForm({ ficha }: FichaEditarProps) {
 
     toast.success("Ficha Eliminada con Exito");
     limpiarTodo();
-    router.push("/fichas");
+    router.push("/personas");
   };
+
+  const onIputTipoChange = ({ target }: any) => {
+      const { value, name } = target;
+      setTipo(value);
+  }
+
   return (
     <>
       <div className="border-b border-gray-900/10 pb-12 ">
@@ -130,7 +145,8 @@ export default function FichaEditarForm({ ficha }: FichaEditarProps) {
                 id="tipo_seguro"
                 name="tipo_seguro"
                 autoComplete="off"
-                disabled={true}
+                value={tipo}
+                onChange={onIputTipoChange}
                 defaultValue={fichaAEditar.tipo_seguro || "NO_TIENE"}
               />
             </div>

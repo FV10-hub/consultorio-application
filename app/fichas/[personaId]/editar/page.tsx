@@ -4,10 +4,10 @@ import Heading from "@/components/ui/Heading";
 import { prisma } from "@/src/lib/prisma";
 import { notFound } from "next/navigation";
 
-async function getFichaById(id: number) {
+async function getFichaById(personaId: number) {
   const ficha = await prisma.ficha.findUnique({
     where: {
-      id,
+      personaId,
     },
     include:{
         persona: true,
@@ -27,9 +27,10 @@ export type FichaWithPersonaAndConsultas = Awaited<ReturnType<typeof getFichaByI
 export default async function EditarFichaPage({
     params,
   }: {
-    params: { id: string };
+    params: { personaId: string };
   }) {
-    const ficha = await getFichaById(+params.id);
+    console.log(params.personaId)
+    const ficha = await getFichaById(parseInt(params.personaId));
   return (
     <>
       <Heading>Editar Ficha</Heading>

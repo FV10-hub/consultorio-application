@@ -12,8 +12,17 @@ export async function createPersona(data: unknown) {
     };
   }
   try {
-    await prisma.persona.create({
-      data: result.data,
+    let personaSaved = await prisma.persona.create({
+      data: {...result.data, email: ""},
+    });
+    await prisma.ficha.create({
+      data: {
+        tipo_seguro: "NUEVO",
+        personaId: personaSaved.id,
+        consultas: {
+          create: [],
+        },
+      },
     });
     revalidatePath("/personas");
   } catch (error) {

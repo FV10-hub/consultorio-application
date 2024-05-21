@@ -35,7 +35,7 @@ type FichaToCreate = {
           },
         },
       });
-      revalidatePath('/fichas')
+      revalidatePath('/personas')
       return true;
     } catch (error) {
       console.error("Error al crear la ficha:", error);

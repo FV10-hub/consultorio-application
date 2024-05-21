@@ -8,12 +8,11 @@ export async function deleteFicha(
     idFicha: number
   ): Promise<boolean> {
     try {
-        console.log("el id del la ficha es", idFicha)
       await prisma.ficha.delete({
         where: { id: idFicha },
       });
   
-      revalidatePath("/fichas");
+      revalidatePath("/personas");
       return true;
     } catch (error) {
       console.error("Error al eliminar la ficha:", error);

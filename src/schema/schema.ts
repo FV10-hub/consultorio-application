@@ -20,10 +20,10 @@ export const PersonaSchema = z.object({
     .string()
     .trim()
     .min(1, { message: "El Telefono de la persona no puede ir vacio" }),
-  email: z
+  /*email: z
     .string()
     .trim()
-    .min(1, { message: "El Correo de la persona no puede ir vacio" }),
+    .min(1, { message: "El Correo de la persona no puede ir vacio" }),*/
   esDoctor: z.boolean({
     required_error: "isActive is required",
     invalid_type_error: "isActive must be a boolean",

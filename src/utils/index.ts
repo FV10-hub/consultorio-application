@@ -33,7 +33,7 @@ export function formatMilesSeparador(amount: string) {
 
 export function formatPhoneNumber(numberString: string) {
   if (numberString.length !== 10) {
-    return "El teléfono debe tener 10 dígitos.";
+    return numberString;
   }
 
   const formatted = `${numberString.slice(0, 4)}-${numberString.slice(4, 7)}-${numberString.slice(7)}`;

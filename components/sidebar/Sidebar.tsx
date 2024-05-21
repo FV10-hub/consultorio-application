@@ -28,13 +28,6 @@ export default function Sidebar() {
             <IoBodyOutline size={30} />
             <span className="ml-5 text-xl">Pacientes</span>
           </Link>
-          <Link
-            href="/fichas"
-            className={`${pathname.startsWith('/fichas') ? 'bg-cyan-500 hover:bg-cyan-600 text-white' : 'hover:bg-gray-100'} flex items-center p-2  rounded transition-all`}
-          >
-            <IoBagAddOutline size={30} />
-            <span className="ml-5 text-xl">Fichas</span>
-          </Link>
           {isAuthenticated && (
             <button
               className="flex w-full items-center p-2 hover:bg-gray-100 rounded transition-all"

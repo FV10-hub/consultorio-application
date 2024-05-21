@@ -6,9 +6,9 @@ export default function NotFound() {
     <div className="text-center">
         <Heading>Ficha No Encontrada</Heading>
         <Link
-            href='/especialidades'
+            href='/fichas/nuevo'
             className="bg-cyan-500 hover:bg-cyan-600 text-white px-10 py-3 text-xl text-center font-bold cursor-pointer w-full lg:w-auto"
-        >Ir a Especialidades</Link>
+        >Crear una Ficha Manualmente</Link>
     </div>
   )
 }

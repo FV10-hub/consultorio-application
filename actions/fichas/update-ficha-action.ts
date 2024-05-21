@@ -29,7 +29,7 @@ export async function updateFicha(
       },
     });
 
-    revalidatePath("/fichas");
+    revalidatePath("/personas");
     return true;
   } catch (error) {
     console.error("Error al actualizar la ficha:", error);

@@ -24,6 +24,13 @@ export default function PersonaDetalle({ persona }: PersonaProps) {
           </Link>
 
           <Link
+            href={`/fichas/${persona.id}/editar`}
+            className="bg-green-500 hover:bg-green-600 mr-2 text-white rounded-lg p-2 uppercase font-bold text-xs text-center"
+          >
+            Ficha
+          </Link>
+
+          <Link
             href={`personas/${persona.id}/galeria`}
             className="bg-orange-500 hover:bg-orange-600 text-white rounded-lg p-2 uppercase font-bold text-xs text-center"
           >
