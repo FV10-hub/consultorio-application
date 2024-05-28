@@ -9,7 +9,7 @@ type FichaProps = {
       updatedAt: Date;
       nombre_completo: string | null;
       documento: string;
-      email: string;
+      email: string | null;
       password: string | null;
       esDoctor: boolean;
       esUsuario: boolean;
