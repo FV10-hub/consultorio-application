@@ -13,6 +13,10 @@ export async function deletePersona(id: number) {
         }
     }
 
+    await prisma.ficha.delete({
+        where: { personaId: id },
+      });
+
     await prisma.persona.delete({
         where: {
             id

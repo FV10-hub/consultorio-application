@@ -2,18 +2,14 @@
 
 import { prisma } from "@/src/lib/prisma";
 import { PersonaSchema } from "@/src/schema/schema";
+import { Persona } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
 export async function createPersona(data: unknown) {
-  const result = PersonaSchema.safeParse(data);
-  if (!result.success) {
-    return {
-      errors: ['No se guardo, ingrese bien los datos'],
-    };
-  }
+  
   try {
     let personaSaved = await prisma.persona.create({
-      data: {...result.data, email: ""},
+      data: data as Persona
     });
     await prisma.ficha.create({
       data: {
@@ -26,6 +22,7 @@ export async function createPersona(data: unknown) {
     });
     revalidatePath("/personas");
   } catch (error) {
+    console.log(error)
     return {
       errors: ["No se pudo guardar verifica los datos"],
     };

@@ -22,15 +22,7 @@ export default function AddPersona({
       //image: formData.get('image')
     };
     
-    const result = PersonaSchema.safeParse(data);
-    if (!result.success) {
-      result.error.issues.forEach((issue) => {
-        toast.error(issue.message);
-      });
-      return;
-    }
-
-    const response = await createPersona(result.data);
+    const response = await createPersona(data);
     if (response?.errors) {
       response.errors.forEach((issue) => {
         toast.error(issue);

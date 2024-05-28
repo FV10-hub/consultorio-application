@@ -13,12 +13,12 @@ model Persona {
   updatedAt       DateTime  @updatedAt
   nombre_completo String?
   documento       String    @unique
-  telefono        String
-  email           String    @unique
+  telefono        String?
+  email           String?    
   password        String?
   esDoctor        Boolean   @default(false)
   esUsuario       Boolean   @default(false)
-  esPaciente      Boolean   @default(false)
+  esPaciente      Boolean   @default(true)
   ficha           Ficha?
   galeria         Galeria[]
 }
