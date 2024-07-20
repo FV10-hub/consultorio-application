@@ -1,6 +1,8 @@
 import { Consulta, Persona } from "@prisma/client";
 import { create } from "zustand";
 import { PersonaItem } from "./types";
+import { updateConsultaById } from "@/actions/consultas/update-consulta-action";
+import { deleteConsultaById } from "@/actions/consultas/delete-consulta-action";
 
 interface Store {
   pacienteState: Persona;
@@ -8,7 +10,9 @@ interface Store {
   clearPacienteState: () => void;
   addConsultasAFicha: (consulta: Consulta) => void;
   consultasDeFicha: Consulta[];
-  limpiarTodo: ()=> void;
+  limpiarTodo: () => void;
+  updateConsultaById: (consulta: Consulta) => boolean;
+  deleteConsultaById: (id: number) => boolean;
 }
 
 export const useStore = create<Store>((set, get) => ({
@@ -36,24 +40,42 @@ export const useStore = create<Store>((set, get) => ({
           : item
       );
     } else {*/
-      consultas = [
-        ...get().consultasDeFicha,
-        {
-          ...consulta,
-        },
-      ];
+    consultas = [
+      ...get().consultasDeFicha,
+      {
+        ...consulta,
+      },
+    ];
     //}
     set(() => ({
-      
       consultasDeFicha: consultas,
-
     }));
   },
-  limpiarTodo: ()=>{
+  limpiarTodo: () => {
     set(() => ({
       consultasDeFicha: [],
-      pacienteState: {} as Persona,      
-
+      pacienteState: {} as Persona,
     }));
+  },
+  updateConsultaById: (consulta): boolean => {
+    if (get().consultasDeFicha.find((item) => item.id === consulta.id)) {
+      try {
+        updateConsultaById(consulta, consulta.id);
+        return true;
+      } catch (error) {
+        console.error("Error al actualizar la Consulta ", error);
+        return false;
+      }
+    }
+    return false;
+  },
+  deleteConsultaById: (id): boolean => {
+    try {
+      deleteConsultaById(id);
+      return true;
+    } catch (error) {
+      console.error("Error al eliminar la Consulta ", error);
+      return false;
+    }
   }
 }));

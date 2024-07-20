@@ -50,7 +50,7 @@ body {
 }
 
 .btn {
-  @apply text-white w-full inline-flex items-center rounded-lg lg:w-auto text-xs px-10 py-3 text-center font-bold cursor-pointer;
+  @apply text-white w-full inline-flex items-center rounded-lg lg:w-auto text-xs px-5 py-3 text-center font-bold cursor-pointer;
 }
 
 .btn-primary {

@@ -34,7 +34,7 @@ export default function FichaEditarForm({ ficha }: FichaEditarProps) {
   const handleGuardarFicha = async () => {
     const data = {
       id: fichaAEditar.id,
-      tipo_seguro: tipo,
+      tipo_seguro: tipo || "NO_TIENE",
       consultas: consultasDeFicha
         .filter((consulta) => consulta.id === 0 || consulta.id === undefined)
         .map((consulta) => ({
@@ -147,7 +147,6 @@ export default function FichaEditarForm({ ficha }: FichaEditarProps) {
                 autoComplete="off"
                 value={tipo}
                 onChange={onIputTipoChange}
-                defaultValue={fichaAEditar.tipo_seguro || "NO_TIENE"}
               />
             </div>
           </div>
