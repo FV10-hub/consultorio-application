@@ -54,7 +54,7 @@ export default function PersonaTable({ personas }: PersonasTableProps) {
                   ))
                 ) : (
                   <tr className="border-b">
-                    <td className="p-3 text-lg text-gray-800">
+                    <td className="p-3 text-sm text-gray-800">
                       No hay registros
                     </td>
                   </tr>

@@ -36,7 +36,7 @@ export default async function PersonaPage({
   }
 
   const page = +searchParams.page || 1;
-  const pageSize = 5;
+  const pageSize = 10;
   if (page < 0) redirect("/personas");
   const personasData = getPersonas(page, pageSize);
   const totalPersonasData = getCountPersonas();
