@@ -50,6 +50,7 @@ model Consulta {
   motivo_consulta String?
   indicacion      String?
   receta          String?
+  diagnostico     String?  @default("")
   asistio         Boolean  @default(false)
   ficha           Ficha    @relation(fields: [fichaId], references: [id], onDelete: Cascade)
   fichaId         Int

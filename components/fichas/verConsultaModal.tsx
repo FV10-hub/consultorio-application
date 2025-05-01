@@ -19,7 +19,7 @@ export const VerModal: React.FC<ModalProps> = ({
     setFormState(consulta);
   }, [consulta]);
 
-  const { observacion, hora_consulta, indicacion, receta, motivo_consulta } =
+  const { observacion, hora_consulta, indicacion, receta, motivo_consulta, diagnostico } =
     formState;
   return (
     <>
@@ -54,6 +54,23 @@ export const VerModal: React.FC<ModalProps> = ({
                           name="motivo_consulta"
                           id="motivo_consulta"
                           value={motivo_consulta || "no hay"}
+                          readOnly={true}
+                          className="w-96 p-3 border-gray-300 rounded-md"
+                          placeholder="Escribe tus observaciones..."
+                        ></input>
+                      </div>
+                      <div className="flex flex-row items-center mt-4">
+                        <label
+                          htmlFor="diagnostico"
+                          className="text-gray-700 w-52 text-sm font-bold mb-2"
+                        >
+                          Diagnostico
+                        </label>
+                        <input
+                          type="text"
+                          name="diagnostico"
+                          id="diagnostico"
+                          value={diagnostico || "no hay"}
                           readOnly={true}
                           className="w-96 p-3 border-gray-300 rounded-md"
                           placeholder="Escribe tus observaciones..."
@@ -124,6 +141,7 @@ export const VerModal: React.FC<ModalProps> = ({
                           motivo_consulta: "",
                           indicacion: "",
                           receta: "",
+                          diagnostico: "",
                           asistio: false,
                           fichaId: 0,
                         });

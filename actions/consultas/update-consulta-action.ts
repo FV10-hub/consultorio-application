@@ -14,6 +14,7 @@ export async function updateConsultaById(data: Consulta, id: number) {
         indicacion: data.indicacion,
         receta: data.receta,
         asistio: data.asistio,
+        diagnostico: data.diagnostico,
         createdAt: data.createdAt,
         updatedAt: data.updatedAt,
         fichaId: data.fichaId

@@ -43,6 +43,7 @@ export default function FichaEditarForm({ ficha }: FichaEditarProps) {
           motivo_consulta: consulta.motivo_consulta,
           observacion: consulta.observacion,
           indicacion: consulta.indicacion,
+          diagnostico: consulta.diagnostico,
           receta: consulta.receta,
           asistio: consulta.asistio ? true : false,
         })),

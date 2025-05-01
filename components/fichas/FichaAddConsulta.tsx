@@ -28,6 +28,7 @@ export default function FichaAddConsulta() {
     observacion: "",
     indicacion: "",
     receta: "",
+    diagnostico: "",
     asistio: true,
     fichaId: 0,
   });
@@ -61,7 +62,7 @@ export default function FichaAddConsulta() {
                 Observación
               </th>
               <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                Asistencia
+                Diagnostico
               </th>
               <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                 Ver
@@ -87,12 +88,7 @@ export default function FichaAddConsulta() {
                     {consulta.observacion}
                   </td>
                   <td className="ext-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                    <input
-                      type="checkbox"
-                      className="mr-2"
-                      checked={consulta.asistio}
-                      disabled
-                    />
+                    {consulta.diagnostico}
                   </td>
                   <td className="ext-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                     <button

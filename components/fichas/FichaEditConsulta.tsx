@@ -36,6 +36,7 @@ export default function FichaEditConsulta({ consultas }: ConsultasProps) {
     hora_consulta: "",
     observacion: "",
     motivo_consulta: "",
+    diagnostico: "",
     indicacion: "",
     receta: "",
     asistio: true,
@@ -62,10 +63,14 @@ export default function FichaEditConsulta({ consultas }: ConsultasProps) {
       setListaFiltrada(consultas);
     } else {
       const listaFiltrada = consultas!
-        .filter((consulta) =>
-          consulta.observacion
-            ?.toLocaleLowerCase()
-            .includes(searchTerm.toLowerCase())
+        .filter(
+          (consulta) =>
+            consulta.observacion
+              ?.toLocaleLowerCase()
+              .includes(searchTerm.toLowerCase()) ||
+            consulta.diagnostico
+              ?.toLocaleLowerCase()
+              .includes(searchTerm.toLowerCase())
         )
         .slice(0, 5);
       setListaFiltrada(listaFiltrada);
@@ -97,7 +102,7 @@ export default function FichaEditConsulta({ consultas }: ConsultasProps) {
             id="search"
             autoComplete="off"
             className="w-96 p-3 rounded-md"
-            placeholder="Buscar consulta por observacion"
+            placeholder="Buscar consulta por observacion y diagnostico"
             value={searchTerm}
             onChange={onChangePaciente}
           />
@@ -108,11 +113,21 @@ export default function FichaEditConsulta({ consultas }: ConsultasProps) {
         <table className="min-w-full">
           <thead className="bg-gray-200 border-b">
             <tr>
-              <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">Fecha</th>
-              <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">Hora</th>
-              <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">Observación</th>
-              <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">Asistencia</th>
-              <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">Ver</th>
+              <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Fecha
+              </th>
+              <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Hora
+              </th>
+              <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Observación
+              </th>
+              <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Diagnostico
+              </th>
+              <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Ver
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -127,15 +142,14 @@ export default function FichaEditConsulta({ consultas }: ConsultasProps) {
                   <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                     {formatFecha(consulta.createdAt)}
                   </td>
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{consulta.hora_consulta}</td>
-                  <td className="text-sm text-pretty text-gray-900 font-light px-6 py-4 whitespace-nowrap">{consulta.observacion}</td>
                   <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                    <input
-                      type="checkbox"
-                      className="mr-2"
-                      checked={consulta.asistio}
-                      disabled
-                    />
+                    {consulta.hora_consulta}
+                  </td>
+                  <td className="text-sm text-pretty text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    {consulta.observacion}
+                  </td>
+                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    {consulta.diagnostico}
                   </td>
                   <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                     <div>
@@ -143,13 +157,13 @@ export default function FichaEditConsulta({ consultas }: ConsultasProps) {
                         onClick={() => handleEditarConsulta(consulta)}
                         className="btn bg-green-400 rounded-lg mr-2 shadow-xl"
                       >
-                        Editar <IoPencil size={20}/>
+                        Editar <IoPencil size={20} />
                       </button>
                       <button
                         onClick={() => handleVerConsulta(consulta)}
                         className="btn bg-gray-400 rounded-lg shadow-xl"
                       >
-                        Ver <IoEye className="ml-2" size={20}/>
+                        Ver <IoEye className="ml-2" size={20} />
                       </button>
                     </div>
                   </td>
@@ -176,4 +190,3 @@ export default function FichaEditConsulta({ consultas }: ConsultasProps) {
     </>
   );
 }
-

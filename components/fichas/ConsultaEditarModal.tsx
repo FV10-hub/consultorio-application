@@ -31,6 +31,7 @@ export const ConsultaEditarModal: React.FC<ModalProps> = ({
     observacion,
     indicacion,
     receta,
+    diagnostico,
     asistio,
     fichaId,
   } = formState;
@@ -46,6 +47,7 @@ export const ConsultaEditarModal: React.FC<ModalProps> = ({
       motivo_consulta,
       indicacion,
       receta,
+      diagnostico,
       asistio,
       fichaId,
   }

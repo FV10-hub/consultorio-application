@@ -7,38 +7,40 @@ type FichaToCreate = {
   tipo_seguro: any;
   personaId: number;
   consultas: {
-      hora_consulta: string | null;
-      observacion: string | null;
-      motivo_consulta: string | null;
-      indicacion: string | null;
-      receta: string | null;
-      asistio: boolean;
+    hora_consulta: string | null;
+    observacion: string | null;
+    motivo_consulta: string | null;
+    indicacion: string | null;
+    receta: string | null;
+    diagnostico: string | null;
+    asistio: boolean;
   }[];
-}
-  export async function createFicha(data: FichaToCreate) {
-    try {
-      const consultasFormatted = data.consultas.map(consulta => ({
-        hora_consulta: consulta.hora_consulta,
-        observacion: consulta.observacion,
-        motivo_consulta: consulta.motivo_consulta,
-        indicacion: consulta.indicacion,
-        receta: consulta.receta,
-        asistio: consulta.asistio,  // Convertir a booleano
-      }));
-  
-      await prisma.ficha.create({
-        data: {
-          tipo_seguro: data.tipo_seguro,
-          personaId: data.personaId,
-          consultas: {
-            create: consultasFormatted,
-          },
+};
+export async function createFicha(data: FichaToCreate) {
+  try {
+    const consultasFormatted = data.consultas.map((consulta) => ({
+      hora_consulta: consulta.hora_consulta,
+      observacion: consulta.observacion,
+      motivo_consulta: consulta.motivo_consulta,
+      indicacion: consulta.indicacion,
+      receta: consulta.receta,
+      diagnostico: consulta.diagnostico,
+      asistio: consulta.asistio, // Convertir a booleano
+    }));
+
+    await prisma.ficha.create({
+      data: {
+        tipo_seguro: data.tipo_seguro,
+        personaId: data.personaId,
+        consultas: {
+          create: consultasFormatted,
         },
-      });
-      revalidatePath('/personas')
-      return true;
-    } catch (error) {
-      console.error("Error al crear la ficha:", error);
-      return false;
-    }
+      },
+    });
+    revalidatePath("/personas");
+    return true;
+  } catch (error) {
+    console.error("Error al crear la ficha:", error);
+    return false;
   }
+}

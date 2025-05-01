@@ -23,6 +23,7 @@ export async function updateFicha(
               observacion: consulta.observacion,
               indicacion: consulta.indicacion,
               receta: consulta.receta,
+              diagnostico: consulta.diagnostico,
               asistio: consulta.asistio,
             })),
         },
