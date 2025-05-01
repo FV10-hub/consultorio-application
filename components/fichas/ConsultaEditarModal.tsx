@@ -117,6 +117,23 @@ export const ConsultaEditarModal: React.FC<ModalProps> = ({
                       </div>
                       <div className="flex flex-row items-center mt-4">
                         <label
+                          htmlFor="diagnostico"
+                          className="text-gray-700 w-52 text-sm font-bold mb-2"
+                        >
+                          Diagnostico
+                        </label>
+                        <input
+                          type="text"
+                          name="diagnostico"
+                          id="diagnostico"
+                          value={diagnostico}
+                          onChange={onIputChange}
+                          className="w-96 p-3 border-gray-300 rounded-md"
+                          placeholder="Motivo de consulta"
+                        />
+                      </div>
+                      <div className="flex flex-row items-center mt-4">
+                        <label
                           htmlFor="observacion"
                           className="text-gray-700 w-52 text-sm font-bold mb-2"
                         >
